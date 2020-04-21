@@ -22,16 +22,15 @@ def fibs(cap,*factors):
 		# million, find the sum of the even-valued terms.
 	# Method: create list of all fibonacci terms that are divisible by
 		# any of the factors. Delete duplicates. Find sum.
-	fib_nums = [1,2]
+	fib_nums = [2,1]
 	mylist = [2]
 	i = 1
-	while fib_nums[i] < cap:
-		newnum = fib_nums[i]+fib_nums[i-1]
+	while fib_nums[1] < cap:
+		fib_nums = [(fib_nums[1]+fib_nums[0]), fib_nums[0]]
+		print(fib_nums)
 		for num in factors:
-			if newnum%num==0:
-				mylist.append(newnum)
-		fib_nums.append(newnum)
-		i = i+1
+			if fib_nums[1]%num==0:
+				mylist.append(fib_nums[1])
 	mylist = list(dict.fromkeys(mylist))
 	out = sum(mylist)
 	return out
