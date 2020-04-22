@@ -96,28 +96,15 @@ def palind(dig):
 			# two 3-digit numbers.
 	# Method: Try all products of three digit numbers. Check if 
 		# palindrome. Find max. Not the most elegant.
-	num = (10**(dig)-1) # 999
-	out = []
-	i=0
-	while (num >= 10**(dig-1)):
-		while (i <= num-10**(dig-1)):
-			if palindrome(num*(num-i)):
-				out.append(num*(num-i))
-			i = i+1
-		num = num-1
-		i = 0
-	return max(out)
-def palindrome(val):
-	mylist = list(str(val))
-	myrev = list(str(val))
-	myrev.reverse()
-	out = False
-	for elem, val in enumerate(mylist):
-		if (val != myrev[elem]):
-			out = False
-			return out
-		else:
-			out = True
-	return out
+	arr = []
+	for i in range(10**(dig-1),10**dig):
+		for n in range(9*10**(dig-1),10**dig):
+			num = i*n
+			if str(num) == str(num)[::-1]:
+				arr.append(num)
+			else:
+				pass
 	
+	return(arr[-1])
+
 print(palind(3))
