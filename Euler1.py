@@ -87,5 +87,37 @@ def sieve_of_atkin(ceiling):
 		if (sieve[a]):
 			primes.append(a)
 	return primes
+##### Project Euler Problem 4:
+def palind(dig):	
+	# A palindromic number reads the same both ways. The largest
+		# palindrome made from the product of two 2-digit numbers 
+		# is 9009 = 91 × 99.
+		# Find the largest palindrome made from the product of 
+			# two 3-digit numbers.
+	# Method: Try all products of three digit numbers. Check if 
+		# palindrome. Find max. Not the most elegant.
+	num = (10**(dig)-1) # 999
+	out = []
+	i=0
+	while (num >= 10**(dig-1)):
+		while (i <= num-10**(dig-1)):
+			if palindrome(num*(num-i)):
+				out.append(num*(num-i))
+			i = i+1
+		num = num-1
+		i = 0
+	return max(out)
+def palindrome(val):
+	mylist = list(str(val))
+	myrev = list(str(val))
+	myrev.reverse()
+	out = False
+	for elem, val in enumerate(mylist):
+		if (val != myrev[elem]):
+			out = False
+			return out
+		else:
+			out = True
+	return out
 	
-print(largest_prime(600851475143))
+print(palind(3))
