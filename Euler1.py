@@ -216,10 +216,14 @@ def PythTriplet(PERIMETER):
 			if (a * a + b * b == c * c):
 				# It is now implied that b < c, because we have a > 0
 				return str(a * b * c)
-
+##### Project Euler Problem 10:
+def sumPrimes(PERIMETER):
+	# The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+	# Find the sum of all the primes below two million.
+	return sum(sieve_of_atkin(PERIMETER))
 
 if __name__ == "__main__":
-	print(PythTriplet(1000))
+	print(sumPrimes(2000000))
 
 
 
