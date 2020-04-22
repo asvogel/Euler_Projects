@@ -200,7 +200,7 @@ def AdjNums(dig):
 		big = 1
 	return biggest
 ##### Project Euler Problem 9:
-def PythTriplet(val):
+def PythTriplet(PERIMETER):
 	# A Pythagorean triplet is a set of three natural numbers,
 		# a < b < c, for which,
 		# a2 + b2 = c2
@@ -210,17 +210,16 @@ def PythTriplet(val):
 	# a^2 + b^2 = c^2 and a+b+c=1000
 	# Method: Find all perfect squares < 1000. Find all combinations of
 		# a + b + c = 1000. Find which one is a pythagorean triplet.
+	for a in range(1, PERIMETER + 1):
+		for b in range(a+1, PERIMETER + 1):
+			c = PERIMETER - a - b
+			if (a * a + b * b == c * c):
+				# It is now implied that b < c, because we have a > 0
+				return str(a * b * c)
 
-	unsquared = []
-	perfect_squares = []
-	out = []
-	for j in range(1, val):
-		unsquared.append(j)
-		perf_squares.append(j*j)
-	
-	return(out)
 
-a = PythTriplet(1000)
-print(a)
-print(a[0]*a[1]*a[2])
+if __name__ == "__main__":
+	print(PythTriplet(1000))
+
+
 
