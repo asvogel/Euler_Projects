@@ -106,5 +106,21 @@ def palind(dig):
 				pass
 	
 	return(arr[-1])
+##### Project Euler Problem 5:
+def mult(num):
+	i = 1
+	out = 0
+	while out < 1:
+		for k in range(int(num/2)+1,num+1):
+			if ((i*num)%k == 0 and out != -1):
+				out = i*num
+				print(out)
+			else:
+				out = -1
+		if (out == -1):
+			out = 0
+			i = i+1
+	return out
 
-print(palind(3))
+
+print(mult(20))
