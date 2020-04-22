@@ -46,7 +46,8 @@ def largest_prime(cap):
 			return num
 	return 0
 def sieve_of_atkin(ceiling):	
-	cap = int(math.sqrt(ceiling))+1
+	#cap = int(math.sqrt(ceiling))+1
+	cap = ceiling
 	# We know 2 and 3 are prime.
 	primes = [2,3]
 	# Initialize the sieve with FALSE
@@ -108,6 +109,12 @@ def palind(dig):
 	return(arr[-1])
 ##### Project Euler Problem 5:
 def mult(num):
+	# 2520 is the smallest number that can be divided by each of the
+		# numbers from 1 to 10 without any remainder. What is the
+		# smallest positive number that is evenly divisible by all
+		# of the numbers from 1 to 20?
+	# Method: Check all numbers from 999**2  down to see if it is 
+		# divisible by 11-20
 	i = 1
 	out = 0
 	while out < 1:
@@ -121,6 +128,39 @@ def mult(num):
 			out = 0
 			i = i+1
 	return out
+##### Project Euler Problem 6:
+def sq_diff(length):
+	# The sum of the squares of the first ten natural numbers is,
+		# 12+22+...+102=385
+	# The square of the sum of the first ten natural numbers is,
+		# (1+2+...+10)2=552=3025
+	# Hence the difference between the sum of the squares of the 
+		# first ten natural numbers and the square of the sum is 
+		# 3025−385=2640
+	# Find the difference between the sum of the squares of the
+		# first one hundred natural numbers and the square of the sum.
+	# Method: (a+b)^2 - (a^2+b^2) is 2ab. Iterate through all of them.
 
+	mylist = range(1, length+1)
+	result = 0
+	i = 0
+	for num in mylist[i:]:
+		for num2 in mylist[(i+1):]:
+			result += 2*num*num2
+		i += 1
+	return result
+#### Project Euler Problem 7:
+def nth_prime(n):
+	# By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, 
+		# we can see that the 6th prime is 13.
+		# What is the 10 001st prime number?
+	# Method: Find a bunch of primes. Return the 10001st.
+	mylist = []
+	i=10
+	while len(mylist)<n:
+		mylist = sieve_of_atkin(10*i*n)
+		i = i*10
+	return mylist[n-1]
+		
 
-print(mult(20))
+print(nth_prime(10001))
