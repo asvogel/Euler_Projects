@@ -161,6 +161,66 @@ def nth_prime(n):
 		mylist = sieve_of_atkin(10*i*n)
 		i = i*10
 	return mylist[n-1]
-		
+##### Project Euler Problem 8:
+def AdjNums(dig):
+	# The four adjacent digits in the 1000-digit number that have 
+		# the greatest product are 9 × 9 × 8 × 9 = 5832.
+	# Find the thirteen adjacent digits in the 1000-digit number
+		#that have the greatest product. What is the value of
+		# this product?
+	# Method: Go number by number and calculate it. 
+	big_num = '731671765313306249192251196744265747423553491'\
+		'9493496983520312774506326239578318016984801869478851843'\
+		'8586156078911294949545950173795833195285320880551112540'\
+		'6987471585238630507156932909632952274430435576689664895'\
+		'0445244523161731856403098711121722383113622298934233803'\
+		'0813533627661428280644448664523874930358907296290491560'\
+		'4407723907138105158593079608667017242712188399879790879'\
+		'2274921901699720888093776657273330010533678812202354218'\
+		'0975125454059475224352584907711670556013604839586446706'\
+		'3244157221553975369781797784617406495514929086256932197'\
+		'8468622482839722413756570560574902614079729686524145351'\
+		'0047482166370484403199890008895243450658541227588666881'\
+		'1642717147992444292823086346567481391912316282458617866'\
+		'4583591245665294765456828489128831426076900422421902267'\
+		'1055626321111109370544217506941658960408071984038509624'\
+		'5544436298123098787992724428490918884580156166097919133'\
+		'8754992005240636899125607176060588611646710940507754100'\
+		'2256983155200055935729725716362695618826704282524836008'\
+		'23257530420752963450'
+	i = 0
+	biggest = 0
+	big = 1
+	while i < (len(big_num)-(dig+1)):
+		for j in range(0, dig):
+			big = big*int(big_num[i+j])
+		if (big > biggest):
+			biggest = big
+		i = i+1
+		big = 1
+	return biggest
+##### Project Euler Problem 9:
+def PythTriplet(val):
+	# A Pythagorean triplet is a set of three natural numbers,
+		# a < b < c, for which,
+		# a2 + b2 = c2
+		# For example, 32 + 42 = 9 + 16 = 25 = 52.
+	# There exists exactly one Pythagorean triplet for which 
+		# a + b + c = 1000. Find the product abc.
+	# a^2 + b^2 = c^2 and a+b+c=1000
+	# Method: Find all perfect squares < 1000. Find all combinations of
+		# a + b + c = 1000. Find which one is a pythagorean triplet.
 
-print(nth_prime(10001))
+	unsquared = []
+	perfect_squares = []
+	out = []
+	for j in range(1, val):
+		unsquared.append(j)
+		perf_squares.append(j*j)
+	
+	return(out)
+
+a = PythTriplet(1000)
+print(a)
+print(a[0]*a[1]*a[2])
+
