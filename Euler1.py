@@ -221,8 +221,15 @@ def sumPrimes(PERIMETER):
 	# The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 	# Find the sum of all the primes below two million.
 	return sum(sieve_of_atkin(PERIMETER))
-##### Project Euler Problem 10:
+
+##### Project Euler Problem 11:
+	# What is the greatest product of four adjacent numbers in the 
+		#same direction (up, down, left, right, or diagonally) 
+		# in the 20×20 grid?
 def int_form(str_grid):
+	# Turn the grid of strings into integers
+	# Split each line by spaces. Iterate through and create a 
+		# new array of ints
 	lines = []
 	for line in str_grid:
 		split_line = line.split()
@@ -234,33 +241,33 @@ def int_form(str_grid):
 	return lines
 
 def product(valx,valy,dx,dy,CONSEC,grid):
+	# Find the product of CONSEC number adjacent values in grid
+		# based on dx and dy
 	output = 1
 	for i in range(CONSEC):
-		output *= grid[valx + dx*i][valy + dy*i]
+		output *= grid[valy + dy*i][valx + dx*i]
 	return output
 
-
-def highest(grid, NUMBERS):
+def highest(input_grid, NUMBERS):
 	
 	# String grid to int grid
-	grid_ints = int_form(grid)
+	GRID = int_form(input_grid)
 	ans = -1
+	width = len(GRID[0])
+	height = len(GRID)
 	
-	height = len(grid_ints)
-	length = len(grid_ints[0])
-	
-	for x in range(length):
-		for y in range(height):
-			if x + NUMBERS <= length:
-				ans = max(product(x,y,1,0,NUMBERS,grid_ints),ans)
+	# Find each product	
+	for y in range(height):
+		for x in range(width):
+			if x + NUMBERS <= width:
+				ans = max(product(x,y,1,0,NUMBERS,GRID),ans)
 			if y + NUMBERS <= height:
-				ans = max(product(x,y,0,1,NUMBERS,grid_ints),ans)
-			if x + NUMBERS <= length and y + NUMBERS <= length:
-				ans = max(product(x,y,1,1,NUMBERS,grid_ints),ans)
-			if x + NUMBERS <= length and y - NUMBERS >= 0:
-				ans = max(product(x,y,1,-1,NUMBERS,grid_ints),ans)
+				ans = max(product(x,y,0,1,NUMBERS,GRID),ans)
+			if x + NUMBERS <= width and y + NUMBERS <= height:
+				ans = max(product(x,y,1,1,NUMBERS,GRID),ans)
+			if x + NUMBERS >= -1 and y + NUMBERS <= height:
+				ans = max(product(x,y,-1,1,NUMBERS,GRID),ans)
 	return ans
-	
 
 string_grid = ['08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08',\
 		'49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00',\
@@ -283,11 +290,11 @@ string_grid = ['08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08',\
 		'20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54',\
 		'01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48']		
 
+##### Project Euler Problem 12:
+
+
+
 
 
 if __name__ == "__main__":
-	print(highest(string4))
-	print(142913828922)
-
-
-
+	print(highest(string_grid,4))
