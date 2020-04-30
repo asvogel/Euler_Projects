@@ -1,3 +1,7 @@
+## https://projecteuler.net/archives
+## asv2122
+## https://github.com/luckytoilet/projecteuler-solutions/blob/master/Solutions.md
+## https://github.com/nayuki/Project-Euler-solutions/tree/master/python
 import math
 
 import sys
