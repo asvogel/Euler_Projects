@@ -451,20 +451,17 @@ numbers = ["37107287533902102798797998220837590246510135740250 \
 20849603980134001723930671666823555245252804609722 \
 53503534226472524250874054075591789781264330331690"]
 
+##### Euler Problem 13
 def first_n_digits(NUMBERS_ARRAY,n):
-	# Euler Problem 13
 	# Compute the first n digits of the sum of numbers in an array
 	SUM = sum(NUMBERS_ARRAY)
 	return str(SUM)[0:n]
 
-# Euler Problem 14
+##### Euler Problem 14
 def collatz_chain(n):
 	CHAIN = [n]
 	while not n == 1:
-		if n%2 == 0:
-			n = int(n/2)
-		else:
-			n = int(3*n+1)
+		n = int(n/2) if n%2 == 0  else int(3*n+1)
 		CHAIN.append(n)
 	return CHAIN
 
@@ -487,35 +484,66 @@ def total_paths(w,h):
 	l1 = max(w,h)
 	l2 = min(w,h)
 	paths += sq_paths(l1)
-	if not l1 == l2:
-		paths += total_paths(l1-l2,l2)
+	paths = paths + total_paths(l1-l2,l2) if not (l1 == l2) else paths
 	return int(paths)
 	
 def sq_paths(L):
 	# For a square grid only
 	return math.factorial(2*L)/(math.factorial(L)*math.factorial(L))
 
-# Euler Problem 16
+##### Euler Problem 16
 def sum_of_digits(NUMBER):
 	mylist = []
 	for digit in str(NUMBER):
 		mylist.append(int(digit))
 	return sum(mylist)
 	
-# Euler Problem 17
-def WORD_FORM(NUMBER):
+##### Euler Problem 17
+def to_english(n):
 	ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
         "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
 	TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
-	STRING_FORM = str(NUMBER)
-	if NUMBER <= 19:
-		STRING_FORM = ONES[NUMBER]
+	STRING_FORM = str(n)
 	
-		
+	if 0 <= n < 20:
+		return ONES[n]
+	elif 20 <= n < 100:
+		return TENS[n // 10] + (ONES[n % 10] if (n % 10 != 0) else "")
+	elif 100 <= n < 1000:
+		return ONES[n // 100] + "hundred" + (("and" + to_english(n % 100)) if (n % 100 != 0) else "")
+	elif 1000 <= n < 1000000:
+		return to_english(n // 1000) + "thousand" + (to_english(n % 1000) if (n % 1000 != 0) else "")
+	else:
+		raise ValueError("Provide a number greater than or equal to zero")
+def compute17(CAP):
+	ans = sum(len(to_english(i)) for i in range(1, CAP+1))
+	return str(ans)
+
+##### Euler Problem 18		
+def compute18(triangle):
+	for i in reversed(range(len(triangle) - 1)):
+		for j in range(len(triangle[i])):
+			triangle[i][j] += max(triangle[i + 1][j], triangle[i + 1][j + 1])
+	return str(triangle[0][0])
 	
+triangle = [  # Mutable
+	[75],
+	[95,64],
+	[17,47,82],
+	[18,35,87,10],
+	[20, 4,82,47,65],
+	[19, 1,23,75, 3,34],
+	[88, 2,77,73, 7,63,67],
+	[99,65, 4,28, 6,16,70,92],
+	[41,41,26,56,83,40,80,70,33],
+	[41,48,72,33,47,32,37,16,94,29],
+	[53,71,44,65,25,43,91,52,97,51,14],
+	[70,11,33,28,77,73,17,78,39,68,17,57],
+	[91,71,52,38,17,14,91,43,58,50,27,29,48],
+	[63,66, 4,68,89,53,67,30,73,16,69,87,40,31],
+	[ 4,62,98,27,23, 9,70,98,73,93,38,53,60, 4,23],
+]	
 	
-	
-	return STRING_FORM
 if __name__ == "__main__":
 	with recursionlimit(10000):
-		print(WORD_FORM(15))
+		print(compute18(triangle))
