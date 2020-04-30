@@ -348,9 +348,6 @@ def divisible_number(FACTORS):
 	while NUMBER_OF_FACTORS <= FACTORS:
 		i += 1
 		NUMBER_OF_FACTORS = len(factors(triangle_number(i)))
-		print(i)
-		print(triangle_number(i))
-		print(NUMBER_OF_FACTORS,'\n')
 	return triangle_number(i)
 
 numbers = ["37107287533902102798797998220837590246510135740250 \
@@ -455,13 +452,70 @@ numbers = ["37107287533902102798797998220837590246510135740250 \
 53503534226472524250874054075591789781264330331690"]
 
 def first_n_digits(NUMBERS_ARRAY,n):
+	# Euler Problem 13
 	# Compute the first n digits of the sum of numbers in an array
 	SUM = sum(NUMBERS_ARRAY)
 	return str(SUM)[0:n]
+
+# Euler Problem 14
+def collatz_chain(n):
+	CHAIN = [n]
+	while not n == 1:
+		if n%2 == 0:
+			n = int(n/2)
+		else:
+			n = int(3*n+1)
+		CHAIN.append(n)
+	return CHAIN
+
+def longest_chain(CAP):
+	ans = 0
+	chain_length = 0
+	for n in range(1,CAP):
+		print(n)
+		if len(collatz_chain(n)) > chain_length:
+			chain_length = len(collatz_chain(n))
+			ans = n
+			print('HEYHEYHEY')
+	print(collatz_chain(n))
+	print()	
+	return ans	
+
+# Euler Problem 15		
+def total_paths(w,h):
+	paths = 0
+	l1 = max(w,h)
+	l2 = min(w,h)
+	paths += sq_paths(l1)
+	if not l1 == l2:
+		paths += total_paths(l1-l2,l2)
+	return int(paths)
+	
+def sq_paths(L):
+	# For a square grid only
+	return math.factorial(2*L)/(math.factorial(L)*math.factorial(L))
+
+# Euler Problem 16
+def sum_of_digits(NUMBER):
+	mylist = []
+	for digit in str(NUMBER):
+		mylist.append(int(digit))
+	return sum(mylist)
+	
+# Euler Problem 17
+def WORD_FORM(NUMBER):
+	ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+	TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+	STRING_FORM = str(NUMBER)
+	if NUMBER <= 19:
+		STRING_FORM = ONES[NUMBER]
+	
+		
 	
 	
 	
+	return STRING_FORM
 if __name__ == "__main__":
 	with recursionlimit(10000):
-		NUMBERS_ARRAY = int_form(numbers)[0]
-		print(first_n_digits(NUMBERS_ARRAY,10))
+		print(WORD_FORM(15))
